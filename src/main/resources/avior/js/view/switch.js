@@ -2,9 +2,8 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"marionette",
 	"text!template/switch.html"
-], function($, _, Backbone, Marionette, swtchTpl){
+], function($, _, Backbone, swtchTpl){
 	var SwitchView = Backbone.View.extend({
 		//tagName: "tbody",
 		

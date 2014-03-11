@@ -2,10 +2,9 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"marionette",
 	"floodlight/hostCollectionFl",
 	"text!template/hosts.html"
-], function($, _, Backbone, Marionette, HostCollection, hostTableTpl){
+], function($, _, Backbone, HostCollection, hostTableTpl){
 	var HostView = Backbone.View.extend({
 	    tagName: "div",
 	    
