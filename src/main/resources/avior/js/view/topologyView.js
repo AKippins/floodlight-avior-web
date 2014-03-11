@@ -488,6 +488,10 @@ define([
 		colorChange: function () {	
 			hostcolor = document.getElementById('hostColor').value;
       		switchcolor = document.getElementById('switchColor').value;
+      		if(hostcolor.search(" ") !== -1 || switchcolor.search(" ") !== -1){
+      		hostcolor = hostcolor.replace(" ",""+""); 
+      		switchcolor = switchcolor.replace(" ",""+""); 
+      		}
       		if(hostcolor === switchcolor){ 
       		alert('Making switches and hosts the same color can make the topology harder to view.');
       		}
