@@ -168,6 +168,19 @@ text {
 aside{
 	text-shadow: none;
 }
+
+.off-canvas-wrap{
+	min-height:100%;
+}
+
+.inner-wrap{
+	min-height:100%;
+}
+
+body,html{
+	height:100%;
+	width:100%;
+}
   
 	</style>
 </head> 
@@ -207,9 +220,13 @@ aside{
         <section class="middle tab-bar-section">
         <a id="logout" href="index.html" data-icon="gear" style="display: none;">Log Out</a><span></span></a>
       </section>
+      
+      <section>
+      <img class="headerIMG" src="img/avior_logo_alt_trans.png" height="40" width="120" style="vertical-align:top;horizontal-align:center;">
+      </section>
     </nav>
 
-    <aside class="left-off-canvas-menu" data-equalizer-watch>
+    <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
         <li><label>Overview:</label></li>
         <li><a href="#controllers">Controllers</a></li>
@@ -238,11 +255,11 @@ aside{
     <section class="main-section">
       <!-- content goes here -->
  
-	<div id="content" class="responsive" data-role="content" data-equalizer-watch></div>
-	
-	   </section>
+	<div id="content" class="responsive" data-role="content"></div>
+		   </section>
 </div>
-</div>  
+</div> 
+ 
 	
 <!-- Footer -->
 	<div data-role="footer" class="footer-docs ui-footer ui-bar-c"  data-position="fixed" data-theme="c" role="contentinfo" >
@@ -251,6 +268,7 @@ aside{
 	<p>Logo Designed by Andrew Evans </p>
 	</div>
 <!-- /Footer -->	
+
 
 
 <!-- Panels  -->
