@@ -2,19 +2,20 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
+	"marionette",
 	"floodlight/firewallModFl",
 	"text!template/firewallEditor.html",
 	"text!template/actionSelect.html",
 	"text!template/controller.html",
-], function($, _, Backbone, FirewallMod, firewallEditor, actionSelect, controllerTpl){
+], function($, _, Backbone, Marionette, FirewallMod, firewallEditor, actionSelect, controllerTpl){
 	var FirewallEdView = Backbone.View.extend({
 		el: $('#content'),
 		
 		template1: _.template(firewallEditor),
 		template2: _.template(actionSelect),
 		template3: _.template(controllerTpl),
-
-		initialize: function(collec, display){
+	
+		initialize: function(collec, display, buttonUpdate){
 			this.toggleCount = 0;
 			console.log(window.innerHeight);
 			console.log(window.outerHeight);
@@ -26,23 +27,22 @@ define([
 			if (display)
 				this.render();
 			//this.listStaticFlows();
-			
-		},
+			if (buttonUpdate)
+				this.buttonUpdating();
+			},
 		
 		events: {
 			"click #getRules": "pushRule",
 			"click #removeRule": "deleteRule",
 			"click #removeAllRules": "deleteRules",
-			//"change #flip-2": "decideRules",
 			"click #enableRules": "enableRules",
-			"click #firewallButtonOff": "enableRules",
 			"click #disableRules": "disableRules",
-			"click #firewallButtonOn": "disableRules",
 			"click #refreshRules": "refreshRules",
 			"click #clearRule": "clearRule",
 			"change input": "validate",
 			"change select": "validate",
-			"change #dpid": "showActions",
+			"change #dpid": "showActions",	
+			"change #firewallToggle": "decideRules",
 		},
 		
 		render: function() {
@@ -50,6 +50,7 @@ define([
 			$('#content').empty();
 			this.$el.html(this.template1({coll: this.collection.toJSON()})).trigger('create');
 		},
+		
 		
 		validate: function(e){
 			
@@ -204,11 +205,6 @@ define([
     	 	});
 		},
 		
-		//decideRules: function(){
-			//if($('#flip-2').value === "on"){"disableRules";}
-			//else{"enableRules";}	
-		//}
-		
 		// move to toggle on/off buttons in the upper right hand corner
 		enableRules: function () {
 			var op = "enable";
@@ -223,6 +219,22 @@ define([
 			disableRules.fetch();
 		},
 		
+		//this.state 
+		decideRules: function () {
+			if($('#radio-choice-d').prop("checked")){
+			alert('Firewall has been disabled.');
+			$("#radio-choice-d").prop("disabled", true);
+			$("#radio-choice-c").prop("disabled", false);
+			this.disableRules();
+			}
+			else{
+			alert('Firewall is now enabled.');
+			$("#radio-choice-c").prop("disabled", true);
+			$("#radio-choice-d").prop("disabled", false);
+			this.enableRules();
+			}
+		},
+		
 		// re-fetches the rules as the exist on the server
 		refreshRules: function () {
 			var op;
@@ -233,6 +245,30 @@ define([
 		// clears all text box fields, removes actionBody 
 		// and returns all drop down menus to initial positioning
 		clearRule: function () {
+			
+		},
+		
+			//queries firewall and sets button based on that
+			//the result of str is "firewall enabled" or "firewall disabled" with quotes intact	
+			//renders controller template at the end
+		buttonUpdating: function () {
+			fm = new FirewallMod("status");
+			fm.fetch().complete(function () {
+			firewallStatus = fm.get("result");
+			str = JSON.stringify(firewallStatus);
+			//alert(firewallStatus);
+				if(firewallStatus === "firewall enabled"){
+				$( "#radio-choice-c" ).prop( "checked", true );
+				$( "#radio-choice-d" ).prop( "checked", false );
+				
+				}
+				else{
+				$( "#radio-choice-d" ).prop( "checked", true );
+				$( "#radio-choice-c" ).prop( "checked", false );
+			
+				}
+			$('#content').append(this.template3).trigger('create');		
+			},this);
 			
 		},
 		
