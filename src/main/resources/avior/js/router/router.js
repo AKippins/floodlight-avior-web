@@ -119,28 +119,90 @@ define([
 			//this.initalize(this.controllerRoute, false, firewallStatus);
 			$('#content').append(this.template).trigger('create');
 			
+			//topo initial load in div
+			var syncCount = 0;
+        	
+        	// Clears out any previous intervals
+			clearInterval(this.interval);
 		
+			var self = this;
+			if (this.hostCollection === undefined){
+				//console.log("no host collection");
+				this.hostview = new HostView({collection: new Host});
+				this.hostview.delegateEvents(this.hostview.events);
+				this.hostCollection = this.hostview.collection;
+			}
+			
+			if (this.switchCollection === undefined){
+				//console.log("no switch collection");
+				var switchDetail = new SwitchDetail({model: new Switch});
+				switchDetail.delegateEvents(switchDetail.events);
+																		
+				switchDetail.listenTo(switchDetail.features, "sync", syncComplete);
+				switchDetail.listenTo(switchDetail.switchStats, "sync", syncComplete);
+				switchDetail.listenTo(switchDetail.description, "sync", syncComplete);
+			}
+			
+			else if(this.switchCollection.models.length > 0 && this.hostCollection.models.length > 0 && this.topology === undefined){
+				this.topology = new TopologyView(self.switchCollection, self.hostCollection, true);
+				$('#topologyview').append(this.topology.render().el);
+				
+			}
+			 
+			else if (this.topology != undefined)
+				$('#topologyview').append(this.topology.render().el);
+				
+				
+			
+			else{
+				//create graph nodes based on switch and host data
+				this.hostview.listenTo(this.hostview.collection, "sync", function () {
+					this.topology = new TopologyView(self.switchCollection, self.hostCollection, true);
+					$('#topologyview').append(this.topology.render().el);
+				
+					
+				});
+			}
+			
+			function syncComplete() {
+				//console.log("sync complete");
+  					syncCount += 1;
+  				
+  					if (syncCount == 3)
+  						renderSwitches();
+			}
+			
+			function renderSwitches() {
+					//console.log("renderSwitches");
+  					self.switchCollection = switchDetail.collection;
+					//create graph nodes based on switch and host data
+					self.topology = new TopologyView(self.switchCollection, self.hostCollection, true);											
+					$('#topologyview').append(self.topology.render().el);
+			}
+								
 		 	// Create views for controller aspects
 			this.statusview = new StatusView({model: new Status});
 			this.uptimeview = new UptimeView({model: new Uptime});
 			this.memoryview = new MemoryView({model: new Memory});
 			this.modulesview = new ModulesView({model: new Modules});
-			this.hostview = new HostView({collection: new Host});
+			//this.hostview = new HostView({model: new Host});
 
-		
+					
 			// Delegate events for controller views
 			this.statusview.delegateEvents(this.statusview.events);
 			this.uptimeview.delegateEvents(this.uptimeview.events);
 			this.memoryview.delegateEvents(this.memoryview.events);
 			this.modulesview.delegateEvents(this.modulesview.events);
-			this.hostview.delegateEvents(this.hostview.events);
+			//this.hostview.delegateEvents(this.hostview.events);
+			
 				
 			// Link controller aspects to id tags
 			$('#uptimeview').append(this.uptimeview.render().el);
 			$('#statusview').append(this.statusview.render().el);
 			$('#memoryview').append(this.memoryview.render().el);
 			$('#modulesview').append(this.modulesview.render().el);
-			$('#hostview').append(this.hostview.render().el);
+			//$('#hostview').append(this.hostview.render().el);
+			
 	
 			//moved toggle button stuff back to firewallEditor.js.
 			//the third parameter here indicates whether or not the buttonUpdating function in firewallEditor should be called. check initialize
@@ -148,7 +210,7 @@ define([
 		
 			document.title = 'Avior - Controllers';
 			//refactor titleChange to a function that takes in the new title as parameter
-			
+		
 			var self = this;
 			
 			//only call fetch when the view is visible
@@ -156,7 +218,7 @@ define([
 					self.uptimeview.model.fetch();
 					self.statusview.model.fetch();
 					self.memoryview.model.fetch();
-					self.hostview.model.fetch();
+					//self.hostview.model.fetch();
 				}, 2000);	
         }, 
         
@@ -244,6 +306,7 @@ define([
         },
         
         topologyRoute: function () {
+        	
         	$("#content").empty();
         	$('#content').prepend('<img class="innerPageLoader" src="img/ajax-loader.gif" />');
         	
@@ -253,6 +316,7 @@ define([
 			clearInterval(this.interval);
 			
 			document.title = 'Avior - Network Topology';
+			
 			
 			var self = this;
 			if (this.hostCollection === undefined){
@@ -273,18 +337,23 @@ define([
 			}
 			
 			else if(this.switchCollection.models.length > 0 && this.hostCollection.models.length > 0 && this.topology === undefined){
-				this.topology = new TopologyView(self.switchCollection, self.hostCollection);
+				this.topology = new TopologyView(self.switchCollection, self.hostCollection, false);
 				this.topology.render();
+				
 			}
 			 
 			else if (this.topology != undefined)
 				this.topology.render();
+				
+				
 			
 			else{
 				//create graph nodes based on switch and host data
 				this.hostview.listenTo(this.hostview.collection, "sync", function () {
-					this.topology = new TopologyView(self.switchCollection, self.hostCollection);
-					this.topology.render();
+					this.topology = new TopologyView(self.switchCollection, self.hostCollection, false);
+				this.topology.render();
+				
+					
 				});
 			}
 			
@@ -300,8 +369,9 @@ define([
 					//console.log("renderSwitches");
   					self.switchCollection = switchDetail.collection;
 					//create graph nodes based on switch and host data
-					self.topology = new TopologyView(self.switchCollection, self.hostCollection);											
+					self.topology = new TopologyView(self.switchCollection, self.hostCollection, false);											
 					self.topology.render();
+					
 			}
         },
         

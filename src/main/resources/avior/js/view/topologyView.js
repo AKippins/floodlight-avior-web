@@ -21,13 +21,14 @@ define([
 		
 		// accepts an array of switch dpids and hosts
 		// connected to the controller
-		initialize: function(s, h) {
+		initialize: function(s, h, m) {
 			console.log("init");
 			this.shiftAmountx = 0;
 			this.shiftAmounty = 0;
 			this.toggleCount = 0;
 			this.switches = s;
 			this.hosts = h;
+			this.mini = m;
 			hostcolor = "grey";
       		switchcolor = "blue";
 			_.forEach(s.models, function(item) {
@@ -77,6 +78,11 @@ define([
 			var self = this;
 			var height = window.innerHeight;
 			var width = window.innerWidth-45;
+			
+			if(this.mini){
+				height = 650px;
+				width = 650px;
+			}
 			
 			this.force = d3.layout.force()
     			.size([width, height])
@@ -498,7 +504,7 @@ define([
 			this.render();
 			showLegend();
 		},
-				
+			
 	});
 	return TopologyView;
 }); 
