@@ -167,14 +167,16 @@ text {
 
 aside{
 	text-shadow: none;
+	min-height:window.innerHeight;
+	overflow-y:visible;
 }
 
 .off-canvas-wrap{
-	min-height:100%;
+
 }
 
 .inner-wrap{
-	min-height:100%;
+
 }
 
 body,html{
@@ -215,11 +217,11 @@ body,html{
   <div class="inner-wrap">
   <div style="display: none;" id="menuBar">
    <nav class="tab-bar">
-      <section class="left-small">
+      <section class="left-small" id="leftMenuIcon">
         <a class="left-off-canvas-toggle menu-icon" data-icon="gear"><span></span></a>
       </section>
 
-      <section class="right-small">
+      <section class="right-small" id="rightMenuIcon">
         <a class="right-off-canvas-toggle menu-icon" data-icon="search"><span></span></a>
       </section>
       
@@ -232,7 +234,7 @@ body,html{
       </section>
     </nav>
 
-    <aside class="left-off-canvas-menu">
+    <aside class="left-off-canvas-menu" id="leftMenu">
       <ul class="off-canvas-list">
         <li><label>Overview:</label></li>
         <li><a href="#controllers">Controllers</a></li>
@@ -242,7 +244,7 @@ body,html{
       </ul>
     </aside>
 
-    <aside class="right-off-canvas-menu" data-equalizer-watch>
+    <aside class="right-off-canvas-menu" id="rightMenu">
       <ul class="off-canvas-list">
         <li><label>Tools:</label></li>
         <li><a href="#staticflowmanager">Static Flow Manager</a></li>

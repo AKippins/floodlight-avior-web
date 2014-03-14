@@ -21,14 +21,14 @@ define([
 		
 		// accepts an array of switch dpids and hosts
 		// connected to the controller
-		initialize: function(s, h, m) {
+		initialize: function(s, h) {
 			console.log("init");
 			this.shiftAmountx = 0;
 			this.shiftAmounty = 0;
 			this.toggleCount = 0;
 			this.switches = s;
 			this.hosts = h;
-			this.mini = m;
+			//this.mini = m;
 			hostcolor = "grey";
       		switchcolor = "blue";
 			_.forEach(s.models, function(item) {
@@ -76,13 +76,9 @@ define([
 		// Create and display the network graph
 		showTopo: function(switchLinks) {
 			var self = this;
+		
 			var height = window.innerHeight;
 			var width = window.innerWidth-45;
-			
-			if(this.mini){
-				height = 650px;
-				width = 650px;
-			}
 			
 			this.force = d3.layout.force()
     			.size([width, height])
@@ -109,6 +105,8 @@ define([
 			$(window).bind('resize', function () { 
 				height = window.innerHeight;
 				width = window.innerWidth-45;
+				
+				
     			$(".mainSVG").attr("height", height);
     			$(".mainSVG").attr("width", width);
     			
@@ -128,12 +126,13 @@ define([
     			if (self.dynamicWindowSize > window.innerWidth)
             		d3.select(".inner").style("width", self.dynamicWindowSize + "px");
             	else 
-            		d3.select(".inner").style("width", window.innerWidth-45 + "px");
-            		
+            		d3.select(".inner").style("width",  window.innerWidth-45 + "px");
+            	
             	if (self.dynamicWindowSize > window.innerHeight)
             		d3.select(".inner").style("height", self.dynamicWindowSize + "px");
             	else
             		d3.select(".inner").style("height", window.innerHeight + "px");
+            		
 			});
 
 			var link = this.svg.selectAll(".link"),
