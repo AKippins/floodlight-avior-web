@@ -12,6 +12,7 @@ define([
 	"floodlight/uptime",
 	"floodlight/hostCollectionFl",
 	"floodlight/testFL",
+	"floodlight/topologyFl",
 	"view/memoryview",
 	"view/modulesview",
 	"view/statusview",
@@ -24,7 +25,7 @@ define([
 	"view/controllerview",
 	"text!template/login.html",
 	"text!template/controller.html",
-], function($, _, Backbone, Marionette, FirewallMod, Switch, SwitchDetail, Memory, Modules, Status, Uptime, Host, Test, MemoryView, ModulesView, StatusView, UptimeView, FlowEditor, FirewallEditor, HostView, TopologyView, TestView, ControllerView, loginTpl, controllerTpl){
+], function($, _, Backbone, Marionette, FirewallMod, Switch, SwitchDetail, Memory, Modules, Status, Uptime, Host, Test, Topo, MemoryView, ModulesView, StatusView, UptimeView, FlowEditor, FirewallEditor, HostView, TopologyView, TestView, ControllerView, loginTpl, controllerTpl){
 	/* Structure used to navigate through views */
 	var Router = Marionette.AppRouter.extend({
 		template: _.template(controllerTpl),
@@ -126,7 +127,7 @@ define([
 			this.uptimeview = new UptimeView({model: new Uptime});
 			this.memoryview = new MemoryView({model: new Memory});
 			this.modulesview = new ModulesView({model: new Modules});
-			this.controllerview = new ControllerView({model: new FirewallMod});
+			this.controllerview = new ControllerView({model: new Topo});
 			//this.hostview = new HostView({model: new Host});
 			
 					
@@ -135,7 +136,7 @@ define([
 			this.uptimeview.delegateEvents(this.uptimeview.events);
 			this.memoryview.delegateEvents(this.memoryview.events);
 			this.modulesview.delegateEvents(this.modulesview.events);
-			//this.controllerview.delegateEvents(this.controllerview.events);
+			this.controllerview.delegateEvents(this.controllerview.events);
 			//this.hostview.delegateEvents(this.hostview.events);
 			
 				

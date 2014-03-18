@@ -3,16 +3,19 @@ define([
 	"underscore",
 	"backbone",
 	"marionette",
+	"collection/topologyCollection",
 	"floodlight/firewallModFl",
 	"text!template/firewallEditor.html",
 	"text!template/actionSelect.html",
 	"text!template/controller.html",
 	"view/topologyView",
-], function($, _, Backbone, Marionette, FirewallMod, firewallEditor, actionSelect, controllerTpl, TopologyView){
+], function($, _, Backbone, Marionette, TopologyCollection, FirewallMod, firewallEditor, actionSelect, controllerTpl, TopologyView){
 	var ControllerView = Backbone.Marionette.CompositeView.extend({
 		el: $('#content'),
 		 itemView: TopologyView,
-		 itemViewContainer: "#topologyview",
+		 collectionView: TopologyCollection,
+		  tagName: "div",
+		 itemViewContainer: "div",
 		template: controllerTpl,
 		
 		template3: _.template(controllerTpl),
@@ -27,6 +30,9 @@ define([
 			"click #rightMenuIcon": "resize",
 		},
 		
+		 appendHtml: function(collectionView, itemView){
+			collectionView.$("div").append(itemView.el);
+		},
 
 		render: function() {
 			//$('#container2').remove();
