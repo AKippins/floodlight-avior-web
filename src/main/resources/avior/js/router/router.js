@@ -129,7 +129,7 @@ define([
 			this.memoryview = new MemoryView({model: new Memory});
 			this.modulesview = new ModulesView({model: new Modules});
 			this.controllerview = new ControllerView({model: new Topo, collection: new TopologyCollection});
-			//this.hostview = new HostView({model: new Host});
+			this.hostview = new HostView({model: new Host});
 			
 					
 			// Delegate events for controller views
@@ -138,7 +138,7 @@ define([
 			this.memoryview.delegateEvents(this.memoryview.events);
 			this.modulesview.delegateEvents(this.modulesview.events);
 			this.controllerview.delegateEvents(this.controllerview.events);
-			//this.hostview.delegateEvents(this.hostview.events);
+			this.hostview.delegateEvents(this.hostview.events);
 			
 				
 			// Link controller aspects to id tags
@@ -146,7 +146,7 @@ define([
 			$('#statusview').append(this.statusview.render().el);
 			$('#memoryview').append(this.memoryview.render().el);
 			$('#modulesview').append(this.modulesview.render().el);
-			//this.controllerview.render();
+			$('#topologyview').append(this.hostview.render().el);
 			//$('#hostview').append(this.hostview.render().el);
 			
 	
@@ -165,7 +165,7 @@ define([
 					self.statusview.model.fetch();
 					self.memoryview.model.fetch();
 					self.controllerview.model.fetch();
-					//self.hostview.model.fetch();
+					self.hostview.model.fetch();
 				}, 2000);	
         }, 
         
