@@ -9,9 +9,7 @@ define([
 ], function($, _, Backbone, Marionette, TopologyCollection, Topology, topologyTpl){
 	var TopologyView = Backbone.Marionette.ItemView.extend({
 		el: $('#content'),
-		tagName: "div",
-  		template: topologyTpl,
- 
+		
 		template: _.template(topologyTpl),
 		
 		events: {

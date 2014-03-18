@@ -3,6 +3,7 @@ define([
 	"underscore",
 	"backbone",
 	"marionette",
+	"collection/topologyCollection",
 	"floodlight/firewallModFl",
 	"floodlight/switch",
 	"view/switchDetail",
@@ -25,7 +26,7 @@ define([
 	"view/controllerview",
 	"text!template/login.html",
 	"text!template/controller.html",
-], function($, _, Backbone, Marionette, FirewallMod, Switch, SwitchDetail, Memory, Modules, Status, Uptime, Host, Test, Topo, MemoryView, ModulesView, StatusView, UptimeView, FlowEditor, FirewallEditor, HostView, TopologyView, TestView, ControllerView, loginTpl, controllerTpl){
+], function($, _, Backbone, Marionette, TopologyCollection, FirewallMod, Switch, SwitchDetail, Memory, Modules, Status, Uptime, Host, Test, Topo, MemoryView, ModulesView, StatusView, UptimeView, FlowEditor, FirewallEditor, HostView, TopologyView, TestView, ControllerView, loginTpl, controllerTpl){
 	/* Structure used to navigate through views */
 	var Router = Marionette.AppRouter.extend({
 		template: _.template(controllerTpl),
@@ -127,7 +128,7 @@ define([
 			this.uptimeview = new UptimeView({model: new Uptime});
 			this.memoryview = new MemoryView({model: new Memory});
 			this.modulesview = new ModulesView({model: new Modules});
-			this.controllerview = new ControllerView({model: new Topo});
+			this.controllerview = new ControllerView({model: new Topo, collection: new TopologyCollection});
 			//this.hostview = new HostView({model: new Host});
 			
 					

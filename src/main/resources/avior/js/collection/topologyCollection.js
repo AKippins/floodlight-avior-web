@@ -1,8 +1,9 @@
 define([
 	"backbone",
+	"marionette",
 	"util",
-	"model/topology"
-], function(Backbone,Util,Topology){
+	"model/topology",
+], function(Backbone,Marionette,Util,Topology){
 	/* Structure to hold topology models */
 	var TopologyCollection = Backbone.Collection.extend({
 		url: Util.missingCtlrErr,

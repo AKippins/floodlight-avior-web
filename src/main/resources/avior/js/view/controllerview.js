@@ -16,9 +16,9 @@ define([
 		 collectionView: TopologyCollection,
 		  tagName: "div",
 		 itemViewContainer: "div",
-		template: controllerTpl,
+		//template: controllerTpl,
 		
-		template3: _.template(controllerTpl),
+		template: _.template(controllerTpl),
 
 
 		initialize: function(){
@@ -37,7 +37,7 @@ define([
 		render: function() {
 			//$('#container2').remove();
 			$('#content').empty();
-			this.$el.html(this.template3(this.model.toJSON())).trigger('create');
+			this.$el.html(this.template(this.model.toJSON())).trigger('create');
 			return this;
 		},
 
