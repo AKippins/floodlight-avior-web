@@ -94,7 +94,6 @@ define([
 			$('#memoryview').append(this.memoryview.render().el);
 			$('#modulesview').append(this.modulesview.render().el);
 			
-			
 			var self = this;
 			
 			//only call fetch when the view is visible
@@ -156,6 +155,7 @@ define([
 			document.title = 'Avior - Controllers';
 			//refactor titleChange to a function that takes in the new title as parameter
 		
+	
 			var self = this;
 			
 			//only call fetch when the view is visible
@@ -284,12 +284,13 @@ define([
 			
 			else if(this.switchCollection.models.length > 0 && this.hostCollection.models.length > 0 && this.topology === undefined){
 				this.topology = new TopologyView(self.switchCollection, self.hostCollection);
-				this.topology.render();
+				this.topology.render;
 				
 			}
 			 
-			else if (this.topology != undefined)
+			else if (this.topology != undefined){
 				this.topology.render();
+			}
 				
 				
 			
@@ -297,9 +298,7 @@ define([
 				//create graph nodes based on switch and host data
 				this.hostview.listenTo(this.hostview.collection, "sync", function () {
 					this.topology = new TopologyView(self.switchCollection, self.hostCollection);
-				this.topology.render();
-				
-					
+					this.topology.render;
 				});
 			}
 			
@@ -315,7 +314,7 @@ define([
 					//console.log("renderSwitches");
   					self.switchCollection = switchDetail.collection;
 					//create graph nodes based on switch and host data
-					self.topology = new TopologyView(self.switchCollection, self.hostCollection);											
+					self.topology = new TopologyView(self.switchCollection, self.hostCollection);										
 					self.topology.render();
 					
 			}
