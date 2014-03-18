@@ -130,7 +130,6 @@ define([
 			this.modulesview = new ModulesView({model: new Modules});
 			this.controllerview = new ControllerView({model: new Topo, collection: new TopologyCollection});
 			this.hostview = new HostView({model: new Host});
-			
 					
 			// Delegate events for controller views
 			this.statusview.delegateEvents(this.statusview.events);

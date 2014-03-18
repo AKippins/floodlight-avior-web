@@ -223,14 +223,14 @@ define([
 		decideRules: function () {
 			if($('#radio-choice-d').prop("checked")){
 			alert('Firewall has been disabled.');
-			$("#radio-choice-d").prop("disabled", true);
-			$("#radio-choice-c").prop("disabled", false);
+			//$("#radio-choice-d").prop("disabled", true);
+			//$("#radio-choice-c").prop("disabled", false);
 			this.disableRules();
 			}
 			else{
 			alert('Firewall is now enabled.');
-			$("#radio-choice-c").prop("disabled", true);
-			$("#radio-choice-d").prop("disabled", false);
+			//$("#radio-choice-c").prop("disabled", true);
+			//$("#radio-choice-d").prop("disabled", false);
 			this.enableRules();
 			}
 		},
@@ -260,12 +260,14 @@ define([
 				if(firewallStatus === "firewall enabled"){
 				$( "#radio-choice-c" ).prop( "checked", true );
 				$( "#radio-choice-d" ).prop( "checked", false );
-				
+				//$("#radio-choice-c").prop("disabled", true);
+				//$("#radio-choice-d").prop("disabled", false);
 				}
 				else{
 				$( "#radio-choice-d" ).prop( "checked", true );
 				$( "#radio-choice-c" ).prop( "checked", false );
-			
+				//$("#radio-choice-d").prop("disabled", true);
+				//$("#radio-choice-c").prop("disabled", false);
 				}
 			$('#content').append(this.template3).trigger('create');		
 			},this);
