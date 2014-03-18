@@ -46,6 +46,7 @@ define([
                 var winHeight = window.innerHeight;
                 document.getElementById("leftMenu").style.height = winHeight + "px";
                 document.getElementById("rightMenu").style.height = winHeight + "px";
+                 document.getElementById("content").style.height = winHeight + "px";
 		},
 	
 	});

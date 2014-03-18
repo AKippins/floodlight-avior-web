@@ -218,11 +218,11 @@ body,html{
   <div style="display: none;" id="menuBar">
    <nav class="tab-bar">
       <section class="left-small" id="leftMenuIcon">
-        <a class="left-off-canvas-toggle menu-icon" data-icon="gear"><span></span></a>
+        <a class="left-off-canvas-toggle" data-theme="a" data-role="button" data-icon="search" data-iconpos="notext" style="margin-left:7px;"></a>
       </section>
 
       <section class="right-small" id="rightMenuIcon">
-        <a class="right-off-canvas-toggle menu-icon" data-icon="search"><span></span></a>
+        <a class="right-off-canvas-toggle" data-theme="a" data-role="button" data-icon="gear" data-iconpos="notext" style="margin-left:7px;"></a>
       </section>
       
         <section class="middle tab-bar-section">
@@ -235,7 +235,7 @@ body,html{
     </nav>
 
     <aside class="left-off-canvas-menu" id="leftMenu">
-      <ul class="off-canvas-list">
+      <ul class="off-canvas-list" id="overview">
         <li><label>Overview:</label></li>
         <li><a href="#controllers">Controllers</a></li>
         <li><a href="#hosts">Hosts</a></li>
@@ -245,7 +245,7 @@ body,html{
     </aside>
 
     <aside class="right-off-canvas-menu" id="rightMenu">
-      <ul class="off-canvas-list">
+      <ul class="off-canvas-list" id="tools">
         <li><label>Tools:</label></li>
         <li><a href="#staticflowmanager">Static Flow Manager</a></li>
         <li><a href="#firewall">Firewall</a></li>
@@ -263,7 +263,7 @@ body,html{
     <section class="main-section">
       <!-- content goes here -->
  
-	<div id="content" class="responsive" data-role="content"></div>
+	<div id="content" class="responsive" data-role="content" style="height:100%"></div>
 		   </section>
 </div>
 </div> 
