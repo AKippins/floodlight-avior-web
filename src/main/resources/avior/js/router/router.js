@@ -97,7 +97,7 @@ define([
 			$('#modulesview').append(this.modulesview.render().el);
 			
 			var self = this;
-			
+	
 			//only call fetch when the view is visible
 			this.interval = setInterval(function(){
 					self.uptimeview.model.fetch();

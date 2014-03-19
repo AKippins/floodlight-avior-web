@@ -25,7 +25,7 @@ FrontPage = Backbone.Marionette.Layout.extend({
 	},
 	
 	regions: {
-	content: "#content",
+	//content: "#content",
     rightPanel: "#topologyview",
  	 },
   
@@ -95,8 +95,8 @@ layout.render();
 			}
 
 
-layout.content.show(new ControllerView({model: new Topo}));
-layout.render();
+//layout.content.show(new ControllerView({model: new Topo}));
+//layout.render();
 return FrontPage;
 
 });

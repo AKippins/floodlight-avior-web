@@ -68,7 +68,7 @@ define([
     				$.mobile.hashListeningEnabled = false;
     			
     				window.location.href = "/avior/index.html#login";
-    			
+    				$('#content').empty();
     				var self = this;
 					$('#content').append(this.template).trigger('create');
 					$('#userLogin').click(function() {self.validate();});
