@@ -1,4 +1,4 @@
-<div style="width: 100%; overflow: hidden;">
+<div style="width: 50%; overflow: hidden;">
     <!--<div id="buttonGroup" style="width: window.innerWidth/2; float: left;" data-role="controlgroup" data-type="horizontal">-->
 	<h3> Network Topology </h3>
 	<div class="large-12 columns">
@@ -10,7 +10,7 @@
 		<% _.each(coll, function(i) { %>  <option><%= i.dpid || i['mac'][0] %></option> <% }); %>
 	</select>
 
-	<button id="showAdvanced" data-icon="false" data-theme="b" style="display:block;" onclick="document.getElementById('advanced').style.display='block';this.style.display='none'">Show Advanced Options</button>
+	<button id="showAdvanced" data-icon="false" data-theme="b" style="display:block;" onclick="document.getElementById('advanced').style.display='block';this.style.display='none'">Advanced</button>
 		
 	<div id="advanced" data-theme="c" data-content-theme="d" style="width:400px;display:none;">
 	<input type="text" id="switchColor" placeholder="Switch Color" value=""></input>

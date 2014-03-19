@@ -55,7 +55,7 @@ define([
 			//console.log("render");
 			var self = this;
 			this.switchLinks;
-			//$('#content').empty();
+			$('#content').empty();
 			this.$el.append(this.template({coll: this.switches.toJSON()})).trigger('create');
 			
 			this.showLegend();
@@ -78,8 +78,8 @@ define([
 		showTopo: function(switchLinks) {
 			var self = this;
 		
-			var height = 1000;
-			var width = 1000;
+			var height = window.innerHeight;
+			var width = window.innerWidth-45;
 			
 			this.force = d3.layout.force()
     			.size([width, height])
@@ -104,8 +104,8 @@ define([
     		// On window resize, relocate legend and expand 
     		// or contract screen scroll amount
 			$(window).bind('resize', function () { 
-				height = 1000;
-				width = 1000;
+				height = window.innerHeight;
+				width = window.innerWidth-45;
 				
 				
     			$(".mainSVG").attr("height", height);

@@ -14,6 +14,7 @@ define([
 	"floodlight/hostCollectionFl",
 	"floodlight/testFL",
 	"floodlight/topologyFl",
+	"layout/frontpage",
 	"view/memoryview",
 	"view/modulesview",
 	"view/statusview",
@@ -26,7 +27,7 @@ define([
 	"view/controllerview",
 	"text!template/login.html",
 	"text!template/controller.html",
-], function($, _, Backbone, Marionette, TopologyCollection, FirewallMod, Switch, SwitchDetail, Memory, Modules, Status, Uptime, Host, Test, Topo, MemoryView, ModulesView, StatusView, UptimeView, FlowEditor, FirewallEditor, HostView, TopologyView, TestView, ControllerView, loginTpl, controllerTpl){
+], function($, _, Backbone, Marionette, TopologyCollection, FirewallMod, Switch, SwitchDetail, Memory, Modules, Status, Uptime, Host, Test, Topo, FrontPage, MemoryView, ModulesView, StatusView, UptimeView, FlowEditor, FirewallEditor, HostView, TopologyView, TestView, ControllerView, loginTpl, controllerTpl){
 	/* Structure used to navigate through views */
 	var Router = Marionette.AppRouter.extend({
 		template: _.template(controllerTpl),
@@ -145,10 +146,11 @@ define([
 			$('#statusview').append(this.statusview.render().el);
 			$('#memoryview').append(this.memoryview.render().el);
 			$('#modulesview').append(this.modulesview.render().el);
-			$('#topologyview').append(this.hostview.render().el);
+			//$('#topologyview').append(this.hostview.render().el);
 			//$('#hostview').append(this.hostview.render().el);
 			
-	
+			FP = new FrontPage();
+		
 			//moved toggle button stuff back to firewallEditor.js.
 			//the third parameter here indicates whether or not the buttonUpdating function in firewallEditor should be called. check initialize
 			new FirewallEditor(this.switchCollection, false, true);
@@ -164,7 +166,7 @@ define([
 					self.statusview.model.fetch();
 					self.memoryview.model.fetch();
 					self.controllerview.model.fetch();
-					self.hostview.model.fetch();
+					//self.hostview.model.fetch();
 				}, 2000);	
         }, 
         
