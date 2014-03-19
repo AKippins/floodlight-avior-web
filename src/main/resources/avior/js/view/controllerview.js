@@ -31,7 +31,7 @@ define([
 		},
 		
 		 appendHtml: function(collectionView, itemView){
-			collectionView.$("div").append(itemView.el);
+			collectionView.$("#topologyView").append(itemView.tagname);
 		},
 
 		render: function() {

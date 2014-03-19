@@ -32,6 +32,7 @@ define([
 		template: _.template(controllerTpl),
 		template2: _.template(loginTpl),
 		
+		
 		routes: {
 			"home": "home",
 			"controllers": "controllerRoute",
@@ -154,8 +155,7 @@ define([
 		
 			document.title = 'Avior - Controllers';
 			//refactor titleChange to a function that takes in the new title as parameter
-		
-	
+			
 			var self = this;
 			
 			//only call fetch when the view is visible
@@ -317,6 +317,13 @@ define([
 					self.topology = new TopologyView(self.switchCollection, self.hostCollection);										
 					self.topology.render();
 					
+		
+					self.FrontPage = new Backbone.Marionette.Region({
+  						el: "#topologyview"
+					});
+	
+					self.FrontPage.show(self.topology);
+						
 			}
         },
         

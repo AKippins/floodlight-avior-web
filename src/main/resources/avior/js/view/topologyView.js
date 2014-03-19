@@ -10,6 +10,7 @@ define([
 	var TopologyView = Backbone.Marionette.ItemView.extend({
 		el: $('#content'),
 		
+		
 		template: _.template(topologyTpl),
 		
 		events: {
