@@ -72,6 +72,7 @@ define([
     				var self = this;
 					$('#content').append(this.template).trigger('create');
 					$('#userLogin').click(function() {self.validate();});
+					
   				}
   				
   			}

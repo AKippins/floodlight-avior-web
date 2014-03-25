@@ -502,7 +502,7 @@ define([
       		alert('Making switches and hosts the same color can make the topology harder to view.');
       		}
 			this.render();
-			showLegend();
+			this.showLegend();
 		},
 			
 	});

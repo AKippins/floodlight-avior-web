@@ -146,11 +146,10 @@ define([
 			$('#statusview').append(this.statusview.render().el);
 			$('#memoryview').append(this.memoryview.render().el);
 			$('#modulesview').append(this.modulesview.render().el);
-			//$('#topologyview').append(this.hostview.render().el);
 			//$('#hostview').append(this.hostview.render().el);
 			
 			FP = new FrontPage();
-		
+			
 			//moved toggle button stuff back to firewallEditor.js.
 			//the third parameter here indicates whether or not the buttonUpdating function in firewallEditor should be called. check initialize
 			new FirewallEditor(this.switchCollection, false, true);
@@ -321,7 +320,7 @@ define([
 					
 		
 					self.FrontPage = new Backbone.Marionette.Region({
-  						el: "#topologyview"
+  						el: "#rightPanel"
 					});
 	
 					self.FrontPage.show(self.topology);

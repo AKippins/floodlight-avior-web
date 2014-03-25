@@ -24,16 +24,19 @@ FrontPage = Backbone.Marionette.Layout.extend({
 			return this;
 	},
 	
+			
+	
 	regions: {
 	//content: "#content",
-    rightPanel: "#topologyview",
+    rightPanel: "#rightPanel", //connects to the right-side div
  	 },
-  
+ 	 
 });
 
-			
-var layout = new FrontPage();
-layout.render();
+
+	
+		var layout = new FrontPage();
+		layout.render();
 
         	var syncCount = 0;
         	
@@ -41,6 +44,10 @@ layout.render();
 			clearInterval(this.interval);
 			
 			var self = this;
+			if(window.location.href === "/avior/index.html#login"){
+			  layout.rightPanel.reset();
+			}
+			
 			if (this.hostCollection === undefined){
 				//console.log("no host collection");
 				this.hostview = new HostView({collection: new Host});
@@ -95,8 +102,6 @@ layout.render();
 			}
 
 
-//layout.content.show(new ControllerView({model: new Topo}));
-//layout.render();
 return FrontPage;
 
 });
