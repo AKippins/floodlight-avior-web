@@ -4,7 +4,8 @@ define([
 	"backbone",
 	"router/router",
 	"text!template/login.html",
-], function($, _, Backbone, Router, loginTpl){
+	"layout/frontpage",
+], function($, _, Backbone, Router, loginTpl, FrontPage){
 	return { 
 		Router: Router,
 
@@ -69,6 +70,10 @@ define([
     			
     				window.location.href = "/avior/index.html#login";
     				$('#content').empty();
+    				
+    				layout = new FrontPage();
+    				layout.rightPanel.close();
+    				
     				var self = this;
 					$('#content').append(this.template).trigger('create');
 					$('#userLogin').click(function() {self.validate();});

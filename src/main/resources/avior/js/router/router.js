@@ -147,18 +147,16 @@ define([
 			$('#memoryview').append(this.memoryview.render().el);
 			$('#modulesview').append(this.modulesview.render().el);
 			//$('#hostview').append(this.hostview.render().el);
-			
-			FP = new FrontPage();
-			
+	
 			//moved toggle button stuff back to firewallEditor.js.
 			//the third parameter here indicates whether or not the buttonUpdating function in firewallEditor should be called. check initialize
 			new FirewallEditor(this.switchCollection, false, true);
 		
 			document.title = 'Avior - Controllers';
 			//refactor titleChange to a function that takes in the new title as parameter
-			
+	
 			var self = this;
-			
+
 			//only call fetch when the view is visible
 			this.interval = setInterval(function(){
 					self.uptimeview.model.fetch();
@@ -167,6 +165,7 @@ define([
 					self.controllerview.model.fetch();
 					//self.hostview.model.fetch();
 				}, 2000);	
+				
         }, 
         
         hostRoute: function() {

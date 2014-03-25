@@ -31,23 +31,19 @@ FrontPage = Backbone.Marionette.Layout.extend({
     rightPanel: "#rightPanel", //connects to the right-side div
  	 },
  	 
+ 
+ 	 
 });
 
+	var layout = new FrontPage();
+	layout.render();
 
-	
-		var layout = new FrontPage();
-		layout.render();
-
-        	var syncCount = 0;
+	var syncCount = 0;
         	
         	// Clears out any previous intervals
 			clearInterval(this.interval);
-			
+		
 			var self = this;
-			if(window.location.href === "/avior/index.html#login"){
-			  layout.rightPanel.reset();
-			}
-			
 			if (this.hostCollection === undefined){
 				//console.log("no host collection");
 				this.hostview = new HostView({collection: new Host});
@@ -67,12 +63,12 @@ FrontPage = Backbone.Marionette.Layout.extend({
 			
 			else if(this.switchCollection.models.length > 0 && this.hostCollection.models.length > 0 && this.topology === undefined){
 				this.topology = new TopologyView(self.switchCollection, self.hostCollection);
-				//this.topology.render;
+				this.topology.render;
 				
 			}
 			 
 			else if (this.topology != undefined){
-				//this.topology.render();
+				this.topology.render();
 			}
 				
 				
@@ -97,8 +93,7 @@ FrontPage = Backbone.Marionette.Layout.extend({
 					//console.log("renderSwitches");
   					self.switchCollection = switchDetail.collection;
 					//create graph nodes based on switch and host data
-					layout.rightPanel.show(new TopologyView(self.switchCollection, self.hostCollection));										
-						
+					layout.rightPanel.show(new TopologyView(self.switchCollection, self.hostCollection));
 			}
 
 
