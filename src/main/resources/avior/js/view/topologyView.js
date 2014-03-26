@@ -10,7 +10,6 @@ define([
 	var TopologyView = Backbone.Marionette.ItemView.extend({
 		el: $('#content'),
 		
-		
 		template: _.template(topologyTpl),
 		
 		events: {
@@ -57,7 +56,6 @@ define([
 			this.switchLinks;
 			//$('#content').empty();
 			this.$el.append(this.template({coll: this.switches.toJSON()})).trigger('create');
-			
 			this.showLegend();
 			var topology = new TopologyCollection({model: Topology});
 			
