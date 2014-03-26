@@ -14,7 +14,7 @@ define([
 ], function($, _, Backbone, Marionette, Host, Switch, Topo, TopologyView, ControllerView, HostView, SwitchDetail, ControllerTpl){
 FrontPage = Backbone.Marionette.Layout.extend({
   template: _.template(ControllerTpl),
-
+   
  
   
   render: function() {
@@ -31,19 +31,15 @@ FrontPage = Backbone.Marionette.Layout.extend({
     rightPanel: "#rightPanel", //connects to the right-side div
  	 },
  	 
- 
- 	 
-});
-
-	var layout = new FrontPage();
-	layout.render();
-
-	var syncCount = 0;
-        	
+ 	
+ 	topologyShow: function() { 
+ 		
         	// Clears out any previous intervals
 			clearInterval(this.interval);
 		
 			var self = this;
+			var syncCount = 0;
+			
 			if (this.hostCollection === undefined){
 				//console.log("no host collection");
 				this.hostview = new HostView({collection: new Host});
@@ -56,9 +52,17 @@ FrontPage = Backbone.Marionette.Layout.extend({
 				var switchDetail = new SwitchDetail({model: new Switch});
 				switchDetail.delegateEvents(switchDetail.events);
 																		
-				switchDetail.listenTo(switchDetail.features, "sync", syncComplete);
-				switchDetail.listenTo(switchDetail.switchStats, "sync", syncComplete);
-				switchDetail.listenTo(switchDetail.description, "sync", syncComplete);
+				switchDetail.listenTo(switchDetail.features, "sync",  function () {
+					syncCount += 1;
+				});
+				switchDetail.listenTo(switchDetail.switchStats, "sync",  function () {
+					syncCount += 1;
+				});
+				switchDetail.listenTo(switchDetail.description, "sync",  function () {
+					syncCount += 1;
+					self.switchCollection = switchDetail.collection;
+					layout.rightPanel.show(new TopologyView(self.switchCollection, self.hostCollection));
+				});
 			}
 			
 			else if(this.switchCollection.models.length > 0 && this.hostCollection.models.length > 0 && this.topology === undefined){
@@ -80,21 +84,13 @@ FrontPage = Backbone.Marionette.Layout.extend({
 					this.topology.render;
 				});
 			}
-			
-			function syncComplete() {
-				//console.log("sync complete");
-  					syncCount += 1;
-  				
-  					if (syncCount == 3)
-  						renderSwitches();
-			}
-			
-			function renderSwitches() {
-					//console.log("renderSwitches");
-  					self.switchCollection = switchDetail.collection;
-					//create graph nodes based on switch and host data
-					layout.rightPanel.show(new TopologyView(self.switchCollection, self.hostCollection));
-			}
+		
+ 	
+ 	},
+ 	
+ 	 
+});
+
 
 
 return FrontPage;

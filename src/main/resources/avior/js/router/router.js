@@ -155,6 +155,9 @@ define([
 			document.title = 'Avior - Controllers';
 			//refactor titleChange to a function that takes in the new title as parameter
 	
+			layout = new FrontPage();
+			layout.topologyShow();
+	
 			var self = this;
 
 			//only call fetch when the view is visible
