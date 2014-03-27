@@ -30,8 +30,10 @@ define([
 			"click #rightMenuIcon": "resize",
 		},
 		
-		 appendHtml: function(collectionView, itemView){
+		appendHtml: function(collectionView, itemView){
+			if(window.innerWidth < 1440){
 			collectionView.$("#topologyView").append(itemView.tagname);
+			}
 		},
 
 		render: function() {
@@ -46,7 +48,7 @@ define([
                 var winHeight = window.innerHeight;
                 document.getElementById("leftMenu").style.height = winHeight + "px";
                 document.getElementById("rightMenu").style.height = winHeight + "px";
-                 document.getElementById("content").style.height = winHeight + "px";
+                document.getElementById("content").style.height = winHeight + "px";
 		},
 	
 	});

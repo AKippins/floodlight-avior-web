@@ -1,4 +1,4 @@
-define([
+xcdefine([
 	"backbone",
 	"marionette",
 	"util",
