@@ -5,7 +5,8 @@
 </style>
 
 </head>
-<div id="container2">
+<div data-equalizer style="width:50%;">
+<div id="container2" data-equalizer-watch>
 	<h2> Firewall </h2>
 	<div id="firewallEdTable">
 	<label for="firewallEdTableLabel">Select DPID:</label>
@@ -15,7 +16,7 @@
 	</select>
 	 </div>
 	</div>
-	 
+ 
 
 	<!--This is the HTML that will render if the device is a mobile device--> 
 	<div class="show-for-medium-down">
@@ -69,7 +70,7 @@
 
 	<!--This is the HTML that will render if the device is a desktop-->
 	<div class="show-for-large-up">
-		<div class="large-12 columns">
+		<div class="large-12 columns" style="width:50%;float:left;">
 			<div class="large-3 medium-3 columns">
 				<button id="getRules">Push Rule</button>
 			</div>
@@ -94,7 +95,7 @@
 		</div>
 		
 
-		<div class="large-12 columns">
+		<div class="large-12 columns" style="width:50%;float:left;">
 		<p>
 			<details id="advancedRuleDetails">
 	  		<summary id="advancedRules">Advanced Firewall Editor</summary>
@@ -137,6 +138,10 @@
 			</details>
 		</p>
 		</div>
+	<div id="rightPanel" class="large-6 columns" style="float:right;position:relative;margin-right:auto;margin-left:auto;display:inline;" data-equalizer-watch></div>
+</div>	
+</div>		
+		
 	</div>
 </div>
 	

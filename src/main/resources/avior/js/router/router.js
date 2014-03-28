@@ -188,12 +188,16 @@ define([
 			
 			document.title = 'Avior - Hosts';
 			
+			layout = new FrontPage();
+			layout.topologyShow();
+			
 			// Link host to id tag
 			$('#content').empty();
 			$('#content').append(this.hostview.render().el).trigger('create');
         },
 		
 		switchRoute: function() {
+			
 			$('#content').empty();
 			$('#content').append('<img class="innerPageLoader" src="img/ajax-loader.gif" />');
 			
@@ -210,12 +214,17 @@ define([
 			
 			document.title = 'Avior - Switches';
 			
+				
+			layout = new FrontPage();
+			layout.topologyShow();
+			
 			function syncComplete() {
   				syncCount += 1;
   				
   				if (syncCount == 3)
 					switchDetail.render();
 			}
+			
 		},
 		
 		staticFlowRoute: function() {
@@ -226,6 +235,7 @@ define([
 			clearInterval(this.interval);
 			
 			document.title = 'Avior - Static Flow Manager';
+			
 
 			if (this.switchCollection === undefined){
 				var switchDetail = new SwitchDetail({model: new Switch});
@@ -234,6 +244,9 @@ define([
 			}
 			else
 				new FlowEditor(this.switchCollection, true);
+				
+			layout = new FrontPage();
+			layout.topologyShow();
         },
         
         firewallRoute: function() {
@@ -244,7 +257,7 @@ define([
 			clearInterval(this.interval);
 			
 			document.title = 'Avior - Firewall';
-
+			
 			if (this.switchCollection === undefined){
 				var switchDetail = new SwitchDetail({model: new Switch});
 				switchDetail.delegateEvents(switchDetail.events);
@@ -252,6 +265,9 @@ define([
 			}
 			else
 				new FirewallEditor(this.switchCollection, true, false);
+			layout = new FrontPage();
+			layout.topologyShow();
+				
         },
         
         topologyRoute: function () {
@@ -320,12 +336,6 @@ define([
 					self.topology = new TopologyView(self.switchCollection, self.hostCollection);										
 					self.topology.render();
 					
-		
-					self.FrontPage = new Backbone.Marionette.Region({
-  						el: "#rightPanel"
-					});
-	
-					self.FrontPage.show(self.topology);
 						
 			}
         },
