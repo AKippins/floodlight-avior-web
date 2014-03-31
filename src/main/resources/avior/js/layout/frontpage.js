@@ -47,42 +47,44 @@ FrontPage = Backbone.Marionette.Layout.extend({
 				this.hostCollection = this.hostview.collection;
 			}
 			
-			if (this.switchCollection === undefined){
-				//console.log("no switch collection");
-				var switchDetail = new SwitchDetail({model: new Switch});
-				switchDetail.delegateEvents(switchDetail.events);
-																		
-				switchDetail.listenTo(switchDetail.features, "sync",  function () {
-					syncCount += 1;
-				});
-				switchDetail.listenTo(switchDetail.switchStats, "sync",  function () {
-					syncCount += 1;
-				});
-				switchDetail.listenTo(switchDetail.description, "sync",  function () {
-					syncCount += 1;
-					self.switchCollection = switchDetail.collection;
-					layout.rightPanel.show(new TopologyView(self.switchCollection, self.hostCollection));
-				});
-			}
-			
-			else if(this.switchCollection.models.length > 0 && this.hostCollection.models.length > 0 && this.topology === undefined){
-				this.topology = new TopologyView(self.switchCollection, self.hostCollection);
-				this.topology.render;
+			if (window.innerWidth > 1024){
+				if (this.switchCollection === undefined){
+					console.log("no switch collection");
+					var switchDetail = new SwitchDetail({model: new Switch});
+					switchDetail.delegateEvents(switchDetail.events);
+																			
+					switchDetail.listenTo(switchDetail.features, "sync",  function () {
+						syncCount += 1;
+					});
+					switchDetail.listenTo(switchDetail.switchStats, "sync",  function () {
+						syncCount += 1;
+					});
+					switchDetail.listenTo(switchDetail.description, "sync",  function () {
+						syncCount += 1;
+						self.switchCollection = switchDetail.collection;
+						layout.rightPanel.show(new TopologyView(self.switchCollection, self.hostCollection));
+					});
+				}
 				
-			}
-			 
-			else if (this.topology != undefined){
-				this.topology.render();
-			}
-				
-				
-			
-			else{
-				//create graph nodes based on switch and host data
-				this.hostview.listenTo(this.hostview.collection, "sync", function () {
+				else if(this.switchCollection.models.length > 0 && this.hostCollection.models.length > 0 && this.topology === undefined){
 					this.topology = new TopologyView(self.switchCollection, self.hostCollection);
 					this.topology.render;
-				});
+					
+				}
+				 
+				else if (this.topology != undefined){
+					this.topology.render();
+				}
+					
+					
+				
+				else{
+					//create graph nodes based on switch and host data
+					this.hostview.listenTo(this.hostview.collection, "sync", function () {
+						this.topology = new TopologyView(self.switchCollection, self.hostCollection);
+						this.topology.render;
+					});
+				}
 			}
 		
  	
