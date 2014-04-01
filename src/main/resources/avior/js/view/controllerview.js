@@ -38,9 +38,9 @@ define([
 
 		render: function() {
 			//$('#container2').remove();
-			$('#content').empty();
-			this.$el.html(this.template(this.model.toJSON())).trigger('create');
-			return this;
+			//$('#content').empty();
+			//this.$el.html(this.template(this.model.toJSON())).trigger('create');
+			//return this;
 		},
 
 		resize: function(){

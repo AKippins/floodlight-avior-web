@@ -28,6 +28,7 @@ FrontPage = Backbone.Marionette.Layout.extend({
 	
 	regions: {
 	//content: "#content",
+	leftPanel: "#leftPanel",
     rightPanel: "#rightPanel", //connects to the right-side div
  	 },
  	 

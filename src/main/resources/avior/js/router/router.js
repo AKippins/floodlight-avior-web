@@ -27,12 +27,13 @@ define([
 	"view/controllerview",
 	"text!template/login.html",
 	"text!template/controller.html",
-], function($, _, Backbone, Marionette, TopologyCollection, FirewallMod, Switch, SwitchDetail, Memory, Modules, Status, Uptime, Host, Test, Topo, FrontPage, MemoryView, ModulesView, StatusView, UptimeView, FlowEditor, FirewallEditor, HostView, TopologyView, TestView, ControllerView, loginTpl, controllerTpl){
+	"text!template/content.html",
+], function($, _, Backbone, Marionette, TopologyCollection, FirewallMod, Switch, SwitchDetail, Memory, Modules, Status, Uptime, Host, Test, Topo, FrontPage, MemoryView, ModulesView, StatusView, UptimeView, FlowEditor, FirewallEditor, HostView, TopologyView, TestView, ControllerView, loginTpl, controllerTpl, contentTpl){
 	/* Structure used to navigate through views */
 	var Router = Marionette.AppRouter.extend({
 		template: _.template(controllerTpl),
 		template2: _.template(loginTpl),
-		
+		template3: _.template(contentTpl),
 		
 		routes: {
 			"home": "home",
@@ -63,7 +64,7 @@ define([
 
 		render: function() {
 			$('#content').empty();
-			this.$el.html(this.template({coll: this.collection.toJSON()})).trigger('create');
+			this.$el.html(this.template3({coll: this.collection.toJSON()})).trigger('create');
 			// body...
 		}*/
 
@@ -121,8 +122,8 @@ define([
 			have an Initialize & Render function combo and then set the page to be called in
 			controllerRoute but not rerendered*/
 			//this.initalize(this.controllerRoute, false, firewallStatus);
-			$('#content').append(this.template).trigger('create');
-			
+			$('#content').append(this.template3).trigger('create');
+			$('#leftPanel').append(this.template).trigger('create');
 								
 		 	// Create views for controller aspects
 			this.statusview = new StatusView({model: new Status});
@@ -157,6 +158,7 @@ define([
 	
 			layout = new FrontPage();
 			layout.topologyShow();
+			
 	
 			var self = this;
 
@@ -172,7 +174,8 @@ define([
         }, 
         
         hostRoute: function() {
-			$('#content').empty();
+			//$('#content').empty();
+			$('#leftPanel').empty();
 			$('#content').append('<img class="innerPageLoader" src="img/ajax-loader.gif" />');
 			
 			// Clears out any previous intervals
@@ -191,9 +194,10 @@ define([
 			layout = new FrontPage();
 			layout.topologyShow();
 			
+			$('#content').append(this.template3).trigger('create');
 			// Link host to id tag
-			$('#content').empty();
-			$('#content').append(this.hostview.render().el).trigger('create');
+			//$('#content').empty();
+			$('#leftPanel').append(this.hostview.render().el).trigger('create');
         },
 		
 		switchRoute: function() {
@@ -217,6 +221,8 @@ define([
 				
 			layout = new FrontPage();
 			layout.topologyShow();
+			
+			$('#content').append(this.template3).trigger('create');
 			
 			function syncComplete() {
   				syncCount += 1;
@@ -247,6 +253,7 @@ define([
 				
 			layout = new FrontPage();
 			layout.topologyShow();
+			$('#content').append(this.template3).trigger('create');
         },
         
         firewallRoute: function() {
@@ -267,6 +274,7 @@ define([
 				new FirewallEditor(this.switchCollection, true, false);
 			layout = new FrontPage();
 			layout.topologyShow();
+			$('#content').append(this.template3).trigger('create');
 				
         },
         
