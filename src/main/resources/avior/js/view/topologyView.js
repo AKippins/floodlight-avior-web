@@ -5,12 +5,14 @@ define([
 	"marionette",
 	"floodlight/topologyFl",
 	"model/topology",
-	"text!template/topology.html"
-], function($, _, Backbone, Marionette, TopologyCollection, Topology, topologyTpl){
+	"text!template/topology.html",
+	"text!template/content.html"
+], function($, _, Backbone, Marionette, TopologyCollection, Topology, topologyTpl, contentTpl){
 	var TopologyView = Backbone.Marionette.ItemView.extend({
 		el: $('#content'),
 		
 		template: _.template(topologyTpl),
+		template2: _.template(contentTpl),
 		
 		events: {
 			"click #showLabels": "toggleLabels",
@@ -58,6 +60,9 @@ define([
 			this.$el.append(this.template({coll: this.switches.toJSON()})).trigger('create');
 			this.showLegend();
 			var topology = new TopologyCollection({model: Topology});
+			this.$el.append(this.template2({coll: this.switches.toJSON()})).trigger('create');
+			$('#rightPanel').empty();
+			
 			
 			topology.fetch().complete(function () {
 				this.switchLinks = topology;
@@ -76,8 +81,8 @@ define([
 		showTopo: function(switchLinks) {
 			var self = this;
 		
-			var height = 1000;
-			var width = 1000;
+			var height = 500;
+			var width = 500;
 			
 			this.force = d3.layout.force()
     			.size([width, height])
@@ -102,8 +107,8 @@ define([
     		// On window resize, relocate legend and expand 
     		// or contract screen scroll amount
 			$(window).bind('resize', function () { 
-				height = 1000;
-				width = 1000;
+				height = 500;
+				width = 500;
 				
 				
     			$(".mainSVG").attr("height", height);
@@ -349,6 +354,7 @@ define([
 		// group element, circles and text to represent the
 		// graph legend
 		showLegend: function() {
+			$('#legendDiv').empty();
 			legendSvg = d3.selectAll("#legendDiv").append("svg")
     			.attr("width", 115)
     			.attr("height", 65);
@@ -499,7 +505,9 @@ define([
       		if(hostcolor === switchcolor){ 
       		alert('Making switches and hosts the same color can make the topology harder to view.');
       		}
-			this.render();
+			$(".mainSVG").empty();
+			var topology = new TopologyCollection({model: Topology});
+			this.showTopo(topology);
 			this.showLegend();
 		},
 			
