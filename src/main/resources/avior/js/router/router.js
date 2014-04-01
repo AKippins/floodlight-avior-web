@@ -195,10 +195,12 @@ define([
 			layout = new FrontPage();
 			layout.topologyShow();
 			
-			$('#content').append(this.template3).trigger('create');
+			
 			// Link host to id tag
-			//$('#content').empty();
+			$('#content').empty();
+			$('#content').append(this.template3).trigger('create');
 			$('#leftPanel').append(this.hostview.render().el).trigger('create');
+			
         },
 		
 		switchRoute: function() {
