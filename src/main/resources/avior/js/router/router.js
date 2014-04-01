@@ -174,8 +174,9 @@ define([
         }, 
         
         hostRoute: function() {
-			//$('#content').empty();
+			$('#content').empty();
 			$('#leftPanel').empty();
+			$('#rightPanel').empty();
 			$('#content').append('<img class="innerPageLoader" src="img/ajax-loader.gif" />');
 			
 			// Clears out any previous intervals
@@ -203,6 +204,8 @@ define([
 		switchRoute: function() {
 			
 			$('#content').empty();
+			$('#leftPanel').empty();
+			$('#rightPanel').empty();
 			$('#content').append('<img class="innerPageLoader" src="img/ajax-loader.gif" />');
 			
 			// Clears out any previous intervals
@@ -235,6 +238,8 @@ define([
 		
 		staticFlowRoute: function() {
 			$('#content').empty();
+			$('#leftPanel').empty();
+			$('#rightPanel').empty();
 			$('#content').prepend('<img class="innerPageLoader" src="img/ajax-loader.gif" />');
 
 			// Clears out any previous intervals
@@ -250,14 +255,15 @@ define([
 			}
 			else
 				new FlowEditor(this.switchCollection, true);
-				
-			layout = new FrontPage();
-			layout.topologyShow();
-			$('#content').append(this.template3).trigger('create');
+				$('#content').append(this.template3).trigger('create');
+				layout = new FrontPage();
+				layout.topologyShow();
         },
         
         firewallRoute: function() {
         	$('#content').empty();
+        	$('#leftPanel').empty();
+			$('#rightPanel').empty();
 			$('#content').prepend('<img class="innerPageLoader" src="img/ajax-loader.gif" />');
 
 			// Clears out any previous intervals
@@ -272,15 +278,16 @@ define([
 			}
 			else
 				new FirewallEditor(this.switchCollection, true, false);
+			$('#content').append(this.template3).trigger('create');
 			layout = new FrontPage();
 			layout.topologyShow();
-			$('#content').append(this.template3).trigger('create');
+			
 				
         },
         
         topologyRoute: function () {
         	
-        	$("#content").empty();
+        	$('#content').empty();
         	$('#content').prepend('<img class="innerPageLoader" src="img/ajax-loader.gif" />');
         	
         	var syncCount = 0;
