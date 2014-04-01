@@ -510,6 +510,17 @@ define([
 			this.showTopo(topology);
 			this.showLegend();
 		},
+		
+		flowManage: function () {
+		 var topology = this;
+    	if (topology.state.shiftNodeDrag){
+      	topology.dragLine.attr('d', 'M' + d.x + ',' + d.y + 'L' + d3.mouse(topology.svgG.node())[0] + ',' + d3.mouse(this.svgG.node())[1]);
+    		} else{
+      	d.x += d3.event.dx;
+      	d.y +=  d3.event.dy;
+      	topology.updateGraph();
+		//use d3 for dragging flows between nodes http://bl.ocks.org/cjrd/6863459
+		},
 			
 	});
 	return TopologyView;
