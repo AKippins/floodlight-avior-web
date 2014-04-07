@@ -1,8 +1,11 @@
-<div data-equalizer>
-<p><h3>Hosts on the network (<%= _.size(hosts) %>)</h3> <button id="refreshhosts" data-role="button" data-theme="b" data-inline="true" data-mini="true" data-icon="refresh">Refresh</button></p>
-<div data-role="collapsible-set" data-theme="c" data-content-theme="d" class="large-6 columns" style="width:50%;" data-equalizer-watch>
+<p>
+	<h3>Hosts on the network (<%= _.size(hosts) %>)</h3> 
+	<button id="refreshhosts" data-role="button" data-theme="b" data-inline="true" data-mini="true" data-icon="refresh">Refresh</button>
+</p>
+<div data-role="collapsible-set" data-theme="c" data-content-theme="d">
 	<!-- Loop over hosts, display each one as own accordion -->
-	<% _.each(hosts, function(host) { %><div data-role="collapsible">
+	<% _.each(hosts, function(host) { %>
+	<div data-role="collapsible">
 		<h3><% if (host.get("ipv4").length > 0) {
 				%><%= host.get("ipv4")[0] %><% } 
 			else {
@@ -12,7 +15,8 @@
 		<!-- Create table for IP addresses. 
 			Code in place to handle singular and plural in title
 			Table borders invisible -->
-		<p><table border="0"><tr><td>IP Address<% if (_.size(host.get("ipv4")) > 1) { %>es<%}%>: </td>
+		<p>
+			<table border="0"><tr><td>IP Address<% if (_.size(host.get("ipv4")) > 1) { %>es<%}%>: </td>
 			<% _.each(host.get("ipv4"), function(current) {
 				%><td><%= current %></td><%
 			}); %>
@@ -39,10 +43,6 @@
 			<td><%= new Date(host.get("lastSeen")).toLocaleString() %> </td>
 		</tr></table>
 		</p>
-		</div>
-		<% }); %>
-</div>
-
-
-<div id="rightPanel" class="large-6 columns" style="float:right;position:relative;margin-right:auto;margin-left:auto;display:inline;width:50%;" data-equalizer-watch></div>
+	</div>
+	<% }); %>
 </div>
