@@ -122,6 +122,7 @@ define([
 			have an Initialize & Render function combo and then set the page to be called in
 			controllerRoute but not rerendered*/
 			//this.initalize(this.controllerRoute, false, firewallStatus);
+			
 			$('#content').append(this.template3).trigger('create');
 			$('#leftPanel').append(this.template).trigger('create');
 								
