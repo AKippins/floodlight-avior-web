@@ -59,15 +59,18 @@ define([
 			
 			//Currently topology goes to rightPanel.
 			//$('#content').empty();
+			//$('#rightPanel').empty();
 			this.$el.append(this.template2({coll: this.switches.toJSON()})).trigger('create');
+			
 			this.$('#rightPanel').append(this.template({coll: this.switches.toJSON()})).trigger('create');
 			
+		
 			//Uncomment the line below to render topology in main content div.
 			//this.$el.append(this.template({coll: this.switches.toJSON()})).trigger('create');
-			this.showLegend();
-			var topology = new TopologyCollection({model: Topology});
 			//$('#rightPanel').empty();
+			this.showLegend();
 			
+			var topology = new TopologyCollection({model: Topology});
 			
 			topology.fetch().complete(function () {
 				this.switchLinks = topology;
@@ -86,8 +89,8 @@ define([
 		showTopo: function(switchLinks) {
 			var self = this;
 		
-			var height = 1200;
-			var width = 1200;
+			var height = 900;
+			var width = 500;
 			
 			this.force = d3.layout.force()
     			.size([width, height])
@@ -112,8 +115,8 @@ define([
     		// On window resize, relocate legend and expand 
     		// or contract screen scroll amount
 			$(window).bind('resize', function () { 
-				height = 1200;
-				width = 1200;
+				height = 900;
+				width = 500;
 				
 				
     			$(".mainSVG").attr("height", height);

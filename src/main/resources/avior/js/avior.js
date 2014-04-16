@@ -4,12 +4,14 @@ define([
 	"backbone",
 	"router/router",
 	"text!template/login.html",
+	"text!template/content.html",
 	"layout/frontpage",
-], function($, _, Backbone, Router, loginTpl, FrontPage){
+], function($, _, Backbone, Router, loginTpl, contentTpl, FrontPage){
 	return { 
 		Router: Router,
 
 		template: _.template(loginTpl),
+		template2: _.template(contentTpl),
 
 		initialize: function(){
 			//console.log(window.innerHeight);
@@ -59,6 +61,7 @@ define([
 					document.getElementById("menuBar").style.display='block';
 					var router = new Router();
 					Backbone.history.start();
+
   				}
   				
   				else {
