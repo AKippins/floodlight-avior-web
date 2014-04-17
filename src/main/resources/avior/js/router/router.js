@@ -299,7 +299,7 @@ define([
 			clearInterval(this.interval);
 			
 			document.title = 'Avior - Network Topology';
-			
+			$('#content').empty();
 			
 			var self = this;
 			if (this.hostCollection === undefined){

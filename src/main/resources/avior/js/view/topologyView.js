@@ -56,18 +56,21 @@ define([
 			//console.log("render");
 			var self = this;
 			this.switchLinks;
-			
-			//Currently topology goes to rightPanel.
+		
 			//$('#content').empty();
 			//$('#rightPanel').empty();
+			
+			//Loads left/right div template
 			this.$el.append(this.template2({coll: this.switches.toJSON()})).trigger('create');
 			
+			//If on main page, load fullscreen. If on any other page, load to right side only.
+			if(document.title === "Avior - Network Topology"){
+			this.$el.append(this.template({coll: this.switches.toJSON()})).trigger('create');
+			}
+			else{
 			this.$('#rightPanel').append(this.template({coll: this.switches.toJSON()})).trigger('create');
-			
+			}
 		
-			//Uncomment the line below to render topology in main content div.
-			//this.$el.append(this.template({coll: this.switches.toJSON()})).trigger('create');
-			//$('#rightPanel').empty();
 			this.showLegend();
 			
 			var topology = new TopologyCollection({model: Topology});
@@ -513,7 +516,7 @@ define([
       		if(hostcolor === switchcolor){ 
       		alert('Making switches and hosts the same color can make the topology harder to view.');
       		}
-			$(".mainSVG").empty();
+			$(".inner").empty();
 			var topology = new TopologyCollection({model: Topology});
 			this.showTopo(topology);
 			this.showLegend();
