@@ -224,12 +224,12 @@ define([
 			
 			document.title = 'Avior - Switches';
 			
+					
+			$('#content').append(this.template3).trigger('create');
 				
 			layout = new FrontPage();
 			layout.topologyShow();
-			
-			$('#content').append(this.template3).trigger('create');
-			
+	
 			function syncComplete() {
   				syncCount += 1;
   				

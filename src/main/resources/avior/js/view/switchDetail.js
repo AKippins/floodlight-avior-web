@@ -24,7 +24,8 @@ define([
 	"text!template/flowTable.html",
 	"text!template/flowEntry.html",
 	"text!template/flowCount.html",
-], function($, _, Backbone, Marionette, Features, SwitchStats, SwitchSummary, SwitchCollection, Description, PortCollection, PortFL, Port, PortStatistics, FlowMod, FlowEditor, FlowCollection, swtchContainer, header, descrip, portFrame, portRow, flowFrame, flowRow, flowCount){
+	"text!template/content.html",
+], function($, _, Backbone, Marionette, Features, SwitchStats, SwitchSummary, SwitchCollection, Description, PortCollection, PortFL, Port, PortStatistics, FlowMod, FlowEditor, FlowCollection, swtchContainer, header, descrip, portFrame, portRow, flowFrame, flowRow, flowCount, contentTpl){
 	var SwitchesSumView = Backbone.View.extend({
 		itemView: SwitchSummary,
 		
@@ -38,6 +39,7 @@ define([
 		template6: _.template(flowFrame),
 		template7: _.template(flowRow),
 		template8: _.template(flowCount),
+		template9: _.template(contentTpl),
 		currentDPID: '',
 			
 		// construct a new collection with switch info from server
@@ -94,8 +96,10 @@ define([
 			
 			switchCount = this.collection.length;
 			
-			this.$el.html(this.template2(switchCount)).trigger('create');
-			switchList.appendTo(this.$el).trigger('create');
+			//Loads to leftPanel
+			this.$el.html(this.template9(switchCount)).trigger('create');
+			this.$('#leftPanel').html(this.template2(switchCount)).trigger('create');
+			switchList.appendTo(this.$('#leftPanel')).trigger('create');
 			
 			//switch details appending...move to specific 
 			//functions for description, ports, flows

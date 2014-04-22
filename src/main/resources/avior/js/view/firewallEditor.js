@@ -7,13 +7,15 @@ define([
 	"text!template/firewallEditor.html",
 	"text!template/actionSelect.html",
 	"text!template/controller.html",
-], function($, _, Backbone, Marionette, FirewallMod, firewallEditor, actionSelect, controllerTpl){
+	"text!template/content.html",
+], function($, _, Backbone, Marionette, FirewallMod, firewallEditor, actionSelect, controllerTpl, contentTpl){
 	var FirewallEdView = Backbone.View.extend({
 		el: $('#content'),
 		
 		template1: _.template(firewallEditor),
 		template2: _.template(actionSelect),
 		template3: _.template(controllerTpl),
+		template4: _.template(contentTpl),
 	
 		initialize: function(collec, display, buttonUpdate){
 			this.toggleCount = 0;
@@ -48,7 +50,8 @@ define([
 		render: function() {
 			//$('#container2').remove();
 			$('#content').empty();
-			this.$el.html(this.template1({coll: this.collection.toJSON()})).trigger('create');
+			this.$el.html(this.template4({coll: this.collection.toJSON()})).trigger('create');
+			this.$('#leftPanel').html(this.template1({coll: this.collection.toJSON()})).trigger('create');
 		},
 		
 		

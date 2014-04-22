@@ -6,12 +6,14 @@ define([
 	"model/flowMod",
 	"text!template/flowEditor.html",
 	"text!template/portSelect.html",
-], function($, _, Backbone, Marionette, FlowMod, flowEditor, portSelect){
+	"text!template/content.html",
+], function($, _, Backbone, Marionette, FlowMod, flowEditor, portSelect, contentTpl){
 	var FlowEdView = Backbone.View.extend({
 		el: $('#content'),
 		
 		template1: _.template(flowEditor),
 		template2: _.template(portSelect),
+		template3: _.template(contentTpl),
 
 		initialize: function(collec, display){
 			this.toggleCount = 0;
@@ -41,7 +43,8 @@ define([
 		render: function() {
 			//$('#container2').remove();
 			$('#content').empty();
-			this.$el.html(this.template1({coll: this.collection.toJSON()})).trigger('create');
+			this.$el.html(this.template3({coll: this.collection.toJSON()})).trigger('create');
+			this.$('#leftPanel').html(this.template1({coll: this.collection.toJSON()})).trigger('create');
 		},
 		
 		validate: function(e){
