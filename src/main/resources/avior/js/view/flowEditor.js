@@ -58,7 +58,7 @@ define([
 					break;
 				case "name":
 					this.name = $(e.currentTarget).val();
-					this.textFields[this.j] = e.currentTarget.id;
+					this.textFields[this.j] = (e.currentTarget.id);
 					this.j += 1;
 					break;
 				case "egressport": 

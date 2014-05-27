@@ -516,10 +516,28 @@ define([
       		if(hostcolor === switchcolor){ 
       		alert('Making switches and hosts the same color can make the topology harder to view.');
       		}
+      		
 			$(".inner").empty();
-			var topology = new TopologyCollection({model: Topology});
-			this.showTopo(topology);
+	
+			var self = this;
+			this.switchLinks;
+		
 			this.showLegend();
+			
+			var topology = new TopologyCollection({model: Topology});
+			
+			topology.fetch().complete(function () {
+				this.switchLinks = topology;
+				self.showTopo(topology);
+        	}, this);
+			_.forEach(this.switches.models, function(item) {
+				//console.log(item.id);
+			}, this);
+        	return this;
+        	
+			//this.render();
+			//this.showTopo(topology);
+			//this.showLegend();
 		},
 		
 		flowManage: function () {
