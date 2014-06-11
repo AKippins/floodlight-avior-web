@@ -421,8 +421,8 @@ define([
 		// zoom in on the selected node, alter graph force attributes and
 		// display the done button 
 		nodeSelect: function (e) {
-			var height = window.innerHeight;
-			var width = window.innerWidth-45;
+			var height = 900;
+			var width = 500;
 			var nodeID = $(e.currentTarget).val();
 			//console.log(nodeID);
 			var nodeData = this.switches.get(nodeID);
@@ -480,8 +480,8 @@ define([
 		// On clicking done in local topology view, return to intial
 		// layout of graph and hide the done button
 		scaleOut: function () {
-			var height = window.innerHeight;
-			var width = window.innerWidth-45;
+			var height = 900;
+			var width = 500;
 			var allNodes = this.svg.selectAll(".node")
 								   .style("opacity", 1);
 								   
