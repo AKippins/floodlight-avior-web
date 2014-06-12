@@ -28,7 +28,6 @@ define([
 								 localStorage.loggedIn = false;
 								 window.location.href = "/avior/index.html#login";
 								 document.getElementById("leftpanel3").style.display='none';
-								 document.getElementById("menuBar").style.display='none';
 								 document.getElementById("logout").style.display='none';
 								 $('#content').empty();
 								 $('#content').append(this.template).trigger('create');
@@ -58,7 +57,6 @@ define([
 				
 					document.getElementById("leftpanel3").style.display='block';
 					document.getElementById("logout").style.display='block';
-					document.getElementById("menuBar").style.display='block';
 					var router = new Router();
 					Backbone.history.start();
 
@@ -92,9 +90,9 @@ define([
 		validate: function() {
 			var self = this;
 			if ( $("#Lusername").val() === "admin" && $("#Lpassword").val() === "admin" ){
+				$('#content').empty();
 				document.getElementById("leftpanel3").style.display='block';
 				document.getElementById("logout").style.display='block';
-				document.getElementById("menuBar").style.display='block';
 				var router = new Router(); 
 				Backbone.history.start();
 				window.location.href = "/avior/index.html#controllers";
