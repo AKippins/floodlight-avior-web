@@ -225,13 +225,13 @@ define([
 		//this.state 
 		decideRules: function () {
 			if($('#radio-choice-d').prop("checked")){
-			alert('Firewall has been disabled.');
+			//alert('Firewall has been disabled.');
 			//$("#radio-choice-d").prop("disabled", true);
 			//$("#radio-choice-c").prop("disabled", false);
 			this.disableRules();
 			}
 			else{
-			alert('Firewall is now enabled.');
+			//alert('Firewall is now enabled.');
 			//$("#radio-choice-c").prop("disabled", true);
 			//$("#radio-choice-d").prop("disabled", false);
 			this.enableRules();

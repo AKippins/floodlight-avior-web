@@ -514,7 +514,7 @@ define([
       		switchcolor = switchcolor.replace(" ",""+""); 
       		}
       		if(hostcolor === switchcolor){ 
-      		alert('Making switches and hosts the same color can make the topology harder to view.');
+      		//alert('Making switches and hosts the same color can make the topology harder to view.');
       		}
       		
 			$(".inner").empty();
